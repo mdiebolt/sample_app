@@ -16,6 +16,17 @@ describe "Users" do
           response.should have_selector("div#error_explanation")
         end.should_not change(User, :count)
       end
+
+      it "should clear both password fields" do
+        visit signup_path
+        fill_in "Name",         :with => ""
+        fill_in "Email",        :with => ""
+        fill_in "Password",     :with => "bad"
+        fill_in "Confirmation", :with => "pass"
+        click_button
+        response.should have_selector("input[name='user[password]'][value='']")
+        response.should have_selector("input[name='user[password_confirmation]'][value='']")
+      end
     end
 
     describe "success" do
