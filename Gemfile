@@ -6,13 +6,13 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
+gem 'gravatar_image_tag', '1.0.0.pre2'
+gem 'will_paginate', '3.0.pre2'
 
 group :development do
   gem 'rspec-rails', '>= 2.1.1'
   gem 'haml'
-  gem 'gravatar_image_tag', '0.1.0'
   gem 'faker', '0.3.1'
-  gem 'will_paginate', '3.0.pre2'
 end
 
 group :test do
@@ -21,8 +21,6 @@ group :test do
   gem 'spork', '0.8.4'
   gem 'haml'
   gem 'factory_girl_rails', '1.0'
-  gem 'gravatar_image_tag', '0.1.0'
-  gem 'will_paginate', '3.0.pre2'
 end
 
 # Use unicorn as the web server
