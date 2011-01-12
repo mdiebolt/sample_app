@@ -48,50 +48,50 @@ describe "LayoutLinks" do
 
   describe "when not signed in" do
     it "should have a signin link" do
-        visit root_path
-        response.should have_selector("a", :href => signin_path,
-                                           :content => "Sign in")
-      end
+      visit root_path
+      response.should have_selector("a", :href => signin_path,
+                                         :content => "Sign in")
     end
+  end
 
     describe "when signed in" do
 
-      before :each do
-        @user = Factory :user
-        visit signin_path
-        fill_in :email,    :with => @user.email
-        fill_in :password, :with => @user.password
-        click_button
-      end
+    before :each do
+      @user = Factory :user
+      visit signin_path
+      fill_in :email,    :with => @user.email
+      fill_in :password, :with => @user.password
+      click_button
+    end
 
-      it "should have a signout link" do
-        visit root_path
-        response.should have_selector("a", :href => signout_path,
-                                           :content => "Sign out")
-      end
+    it "should have a signout link" do
+      visit root_path
+      response.should have_selector("a", :href => signout_path,
+                                         :content => "Sign out")
+    end
 
-      it "should have a profile link" do
-        visit root_path
+    it "should have a profile link" do
+      visit root_path
+      response.should have_selector("a", :href => user_path(@user),
+                                         :content => "Profile")
+    end
+
+    describe "as administrator" do
+      it "should have user delete links" do
+        @user.toggle!(:admin)
+        visit users_path
         response.should have_selector("a", :href => user_path(@user),
-                                           :content => "Profile")
-      end
-
-      describe "as administrator" do
-        it "should have user delete links" do
-          @user.toggle!(:admin)
-          visit users_path
-          response.should have_selector("a", :href => user_path(@user),
-                                             :content => "delete")
-        end
-      end
-
-      describe "as non-administrator" do
-        it "should not have user delete links" do
-          @user.admin = false
-          visit users_path
-          response.should_not have_selector("a", :href => user_path(@user),
-                                                 :content => "delete")
-        end
+                                           :content => "delete")
       end
     end
+
+    describe "as non-administrator" do
+      it "should not have user delete links" do
+        @user.admin = false
+        visit users_path
+        response.should_not have_selector("a", :href => user_path(@user),
+                                               :content => "delete")
+      end
+    end
+  end
 end
