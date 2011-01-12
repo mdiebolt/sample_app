@@ -1,8 +1,12 @@
+= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"
+= javascript_include_tag "jquery.NobleCount.min"
+
 - if signed_in?
   %table.front{ :summary => "For signed-in users" }
     %tr
       %td.main
         %h1.micropost What's up?
+        %span#chars_remaining
         = render 'shared/micropost_form'
         = render 'shared/feed'
       %td.sidebar.round
@@ -14,3 +18,16 @@
     %a{:href => "http://railstutorial.org/"} Ruby on Rails Tutorial
     sample application.
   = link_to "Sign up now!", signup_path, :class => "signup_button round"
+
+:javascript
+  $('#micropost_content').NobleCount('#chars_remaining');
+
+%style
+  :sass
+    h1.micropost
+      width: 360px
+      display: inline-block
+
+    #chars_remaining
+      font-weight: bold
+      color: #AAA

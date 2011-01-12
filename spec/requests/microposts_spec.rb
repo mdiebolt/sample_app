@@ -26,7 +26,7 @@ describe "Microposts" do
     end
 
     describe "success" do
-
+jquery.NobleCount.min.js
       it "should make a new micropost" do
         content = "Lorem ipsum dolor sit amet"
         lambda do
