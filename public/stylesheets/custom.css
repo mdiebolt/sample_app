@@ -221,10 +221,15 @@ table.microposts tr td.micropost {
   padding-top: 10px;
 }
 
-table.microposts tr td.micropost span.timestamp {
+span.timestamp {
   display: block;
   font-size: 85%;
   color: #666;
+}
+
+.delete_micropost {
+  float: right;
+  vertical-align: middle;
 }
 
 div.user_info img {
@@ -250,4 +255,12 @@ form.new_micropost {
 form.new_micropost textarea {
   height: 4em;
   margin-bottom: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.main ul:nth-child(odd) {
+  background: #e5ecf9;
 }
