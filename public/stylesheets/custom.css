@@ -120,12 +120,13 @@ table.profile {
   margin-bottom: 0;
 }
 
-td.main {
+.main {
   width: 70%;
   padding: 1em;
 }
 
-td.sidebar {
+.sidebar {
+  display: inline-block;
   width: 30%;
   padding: 1em;
   vertical-align: top;
@@ -263,4 +264,17 @@ ul {
 
 .main ul:nth-child(odd) {
   background: #e5ecf9;
+}
+
+.front, .profile {
+  position: relative;
+}
+
+.sidebar.round {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 25%;
+  -webkit-box-sizing: border-box;
 }

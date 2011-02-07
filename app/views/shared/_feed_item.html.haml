@@ -1,7 +1,7 @@
-%tr
-  %td.gravatar
+%ul
+  .gravatar
     = link_to gravatar_for(feed_item.user), feed_item.user
-  %td.micropost
+  %li.micropost
     %span.user
       = link_to feed_item.user.name, feed_item.user
     %span.content
@@ -9,5 +9,5 @@
     %span.timestamp
       Posted #{ time_ago_in_words(feed_item.created_at) } ago.
   - if current_user?(feed_item.user)
-  %td
-    = link_to "delete", user_micropost_path(current_user, feed_item), :method => :delete, :confirm => "You sure?", :title => feed_item.content
+    .delete_micropost
+      = link_to "delete", user_micropost_path(current_user, feed_item), :method => :delete, :confirm => "You sure?", :title => feed_item.content
