@@ -70,6 +70,15 @@ describe "Users" do
         controller.should be_signed_in
         response.should have_selector("strong", :content => "#{user.microposts.count} microposts")
       end
+
+      it "should not display delete links for microposts a user did not create" do
+        user = Factory :user
+        user2 = Factory(:user, :email => Factory.next(:email))
+        integration_sign_in user
+        controller.should be_signed_in
+        visit '/users/2'
+        response.should_not have_selector("a", :content => "delete")
+      end
     end
   end
 end
