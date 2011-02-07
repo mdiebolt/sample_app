@@ -5,13 +5,17 @@ describe MicropostsController do
 
   describe "access control" do
 
+    before(:each) do
+      @user = Factory(:user)
+    end
+
     it "should deny access to 'create'" do
-      post :create
+      post :create, :user_id => @user.id
       response.should redirect_to(signin_path)
     end
 
     it "should deny access to 'destroy'" do
-      delete :destroy, :id => 1
+      delete :destroy, :user_id => @user.id, :id => 1
       response.should redirect_to(signin_path)
     end
   end
@@ -30,12 +34,12 @@ describe MicropostsController do
 
       it "should not create a micropost" do
         lambda do
-          post :create, :micropost => @attr
+          post :create, :user_id => @user.id, :micropost => @attr
         end.should_not change(Micropost, :count)
       end
 
       it "should render the home page" do
-        post :create, :micropost => @attr
+        post :create, :user_id => @user.id, :micropost => @attr
         response.should render_template('pages/home')
       end
     end
@@ -48,17 +52,17 @@ describe MicropostsController do
 
       it "should create a micropost" do
         lambda do
-          post :create, :micropost => @attr
+          post :create, :user_id => @user.id, :micropost => @attr
         end.should change(Micropost, :count).by(1)
       end
 
       it "should redirect to the home page" do
-        post :create, :micropost => @attr
+        post :create, :user_id => @user.id, :micropost => @attr
         response.should redirect_to(root_path)
       end
 
       it "should have a flash message" do
-        post :create, :micropost => @attr
+        post :create, :user_id => @user.id, :micropost => @attr
         flash[:success].should =~ /micropost created/i
       end
     end
@@ -76,7 +80,7 @@ describe MicropostsController do
       end
 
       it "should deny access" do
-        delete :destroy, :id => @micropost
+        delete :destroy, :user_id => @user.id, :id => @micropost
         response.should redirect_to(root_path)
       end
     end
@@ -90,7 +94,7 @@ describe MicropostsController do
 
       it "should destroy the micropost" do
         lambda do
-          delete :destroy, :id => @micropost
+          delete :destroy, :user_id => @user.id, :id => @micropost
         end.should change(Micropost, :count).by(-1)
       end
     end
