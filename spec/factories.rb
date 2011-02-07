@@ -13,3 +13,9 @@ Factory.define :micropost do |micropost|
   micropost.content "Foo bar"
   micropost.association :user
 end
+
+Factory.define :user_with_microposts, :parent => :user do |user|
+  user.after_create { |a| Factory(:micropost, :user => a) }
+  user.after_create { |a| Factory(:micropost, :user => a) }
+end
+

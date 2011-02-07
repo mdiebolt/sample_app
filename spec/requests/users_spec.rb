@@ -63,6 +63,13 @@ describe "Users" do
         click_link "Sign out"
         controller.should_not be_signed_in
       end
+
+      it "should display correctly pluralized micropost count" do
+        user = Factory :user_with_microposts
+        integration_sign_in user
+        controller.should be_signed_in
+        response.should have_selector("strong", :content => "#{user.microposts.count} microposts")
+      end
     end
   end
 end
